@@ -6,9 +6,12 @@ function isCollided(enemy, player) {
   && (enemy.y === player.y);
 }
 
-function handleWin(player) {
+function handleWin(thisPlayer) {
   alert('win!!!');
-  reset(player, allEnemies);
+  thisPlayer.x = playerStartingPoint.x;
+  thisPlayer.y = playerStartingPoint.y;
+  dataLayer.score += 1;
+  dataLayer.level += 1;
 }
 
 function reset(player, allEnemies) {

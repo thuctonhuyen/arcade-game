@@ -60,11 +60,7 @@ Player.prototype.handleInput = function(key) {
     case 'up': {
       if(this.y <= 40) {
         //reset:
-        alert('you win');
-        this.x = playerStartingPoint.x;
-        this.y = playerStartingPoint.y;
-        dataLayer.score += 1;
-        dataLayer.level += 1;
+        handleWin(this);
       } else {
         this.y = this.y - verticalMoveUnit;
       }
