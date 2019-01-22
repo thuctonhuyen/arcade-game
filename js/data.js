@@ -23,3 +23,5 @@ const canvas = {
   height: 606,
   width: 505
 }
+
+const scorePanelClassName = 'score-panel';

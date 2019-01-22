@@ -12,10 +12,12 @@ function handleWin(thisPlayer) {
   thisPlayer.y = playerStartingPoint.y;
   dataLayer.score += 1;
   dataLayer.level += 1;
+
+  document.querySelector('.' + scorePanelClassName).innerText = 'Score:' + dataLayer.score;
 }
 
 function reset(player, allEnemies) {
 
 
-  // TODO: based on datalayer level --> create new list of enemy with increasing of speedD
+  // TODO: based on datalayer level --> create more enemies
 }
