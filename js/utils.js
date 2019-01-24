@@ -7,13 +7,21 @@ function isCollided(enemy, player) {
 }
 
 function handleWin(thisPlayer) {
-  alert('win!!!');
   thisPlayer.x = playerStartingPoint.x;
   thisPlayer.y = playerStartingPoint.y;
   dataLayer.score += 1;
   dataLayer.level += 1;
 
-  document.querySelector('.' + scorePanelClassName).innerText = 'Score:' + dataLayer.score;
+  document.querySelector('.' + scorePanelClassName).innerText = 'Score: ' + dataLayer.score;
+
+  if(currentEnemies < maxEnemies) {
+
+    const yCoordinate = 'y_row' + currentRow;
+    allEnemies.push(new Enemy(enemyStartingPoint.x, enemyStartingPoint[yCoordinate]));
+
+    currentRow = Math.floor(Math.random() * 3) + 1;
+    currentEnemies += 1;
+  }
 }
 
 function reset(player, allEnemies) {

@@ -82,12 +82,7 @@ Player.prototype.handleInput = function(key) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies = [];
-let enemyYCoord = 60;
-for(let i = 0; i < totalEnemies; i++) {
-  allEnemies.push(new Enemy(enemyStartingPoint.x, enemyYCoord));
-  enemyYCoord = enemyYCoord * 2.5;
-}
+let allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
 
 let player = new Player(playerStartingPoint.x, playerStartingPoint.y);
 
