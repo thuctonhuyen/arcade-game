@@ -1,4 +1,11 @@
 body {
-    max-width: 100%;
-    text-align: center;
+  max-width: 100%;
+  text-align: center;
+  font-family: 'Baloo Thambi', cursive;
+  font-size: 14px;
+}
+
+.score-panel {
+  font-size: 2.5rem;
+  color: red;
 }
