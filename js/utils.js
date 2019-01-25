@@ -1,14 +1,24 @@
-function isCollided(enemy, player) {
-  return (enemy.x === player.x
+function handleCollision(enemy, player) {
+  const enemyXRange = [enemy.x - 50, enemy.x + 100];
+  const enemyYRange = [enemy.y, enemy.y - 100];
+  if (
+   player.x > enemyXRange[0] && player.x < enemyXRange[1]
+   &&
+   player.y < enemyYRange[0] && player.y > enemyYRange[1]
+  ) {
+    console.log('enemyXRange', enemyXRange);
+    console.log('enemyYRange', enemyYRange);
+    console.log('player', player.x, player.y)
+    console.log('enemy', enemy.x, enemy.y);
+    // console.log('lose!!');
 
-
-  )
-  && (enemy.y === player.y);
+    handleLose();
+  }
 }
 
 function handleWin(thisPlayer) {
-  thisPlayer.x = playerStartingPoint.x;
-  thisPlayer.y = playerStartingPoint.y;
+  reset(thisPlayer);
+
   dataLayer.score += 1;
   dataLayer.level += 1;
 
@@ -24,8 +34,20 @@ function handleWin(thisPlayer) {
   }
 }
 
-function reset(player, allEnemies) {
+function handleLose() {
+  dataLayer.score = 0;
+  dataLayer.level = 0;
 
+  document.querySelector('.' + scorePanelClassName).innerText = 'Score: ' + dataLayer.score;
 
-  // TODO: based on datalayer level --> create more enemies
+  currentRow = 1;
+  currentEnemies = 3;
+
+  player = new Player(playerStartingPoint.x, playerStartingPoint.y);
+  allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
+}
+
+function reset(thisPlayer) {
+  thisPlayer.x = playerStartingPoint.x;
+  thisPlayer.y = playerStartingPoint.y;
 }

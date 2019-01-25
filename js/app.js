@@ -19,7 +19,8 @@ Enemy.prototype.update = function(dt) {
   if(this.x >= 500) {
     this.x = 0;
   }
-  // console.log('isColided yet?', isCollided(this, player));
+
+  handleCollision(this, player);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -37,7 +38,7 @@ var Player = function(x, y) {
 };
 
 Player.prototype.update = function(dt) {
-
+  // do nothing
 };
 
 Player.prototype.render = function() {
@@ -53,7 +54,6 @@ Player.prototype.handleInput = function(key) {
     }
     case 'right': {
       const temp = this.x + horizontalMoveUnit;
-      console.log('temp', temp);
       this.x = temp >= 500 ? this.x : temp;
       break;
     }
@@ -83,6 +83,7 @@ Player.prototype.handleInput = function(key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
+// let allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1)];
 
 let player = new Player(playerStartingPoint.x, playerStartingPoint.y);
 

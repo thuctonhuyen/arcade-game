@@ -20,6 +20,16 @@ const enemyStartingPoint = {
   y_row3: 230,
 }
 
+const enemySize = {
+  width: 101,
+  height: 171
+};
+
+const playerSize = {
+  width: 101,
+  height: 171
+};
+
 const maxEnemies = 12;
 let currentEnemies = 3;
 let currentRow = Math.floor(Math.random() * 3) + 1;
