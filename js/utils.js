@@ -1,53 +1,62 @@
 function handleCollision(enemy, player) {
-  const enemyXRange = [enemy.x - 50, enemy.x + 100];
-  const enemyYRange = [enemy.y, enemy.y - 100];
-  if (
-   player.x > enemyXRange[0] && player.x < enemyXRange[1]
-   &&
-   player.y < enemyYRange[0] && player.y > enemyYRange[1]
-  ) {
-    console.log('enemyXRange', enemyXRange);
-    console.log('enemyYRange', enemyYRange);
-    console.log('player', player.x, player.y)
-    console.log('enemy', enemy.x, enemy.y);
-    // console.log('lose!!');
 
+  const enemyXRange = [enemy.x - 15, enemy.x + 50];
+  const playerXRange = [player.x - 15, player.x + 50];
+
+  const enemyYRange = [enemy.y - 5, enemy.y + 50];
+  const playerYRange = [player.y - 5, player.y + 50];
+
+  if (
+    (
+      enemyXRange[0] >= playerXRange[0]
+      && enemyXRange[0] <= playerXRange[1]
+      ||
+      playerXRange[0] >= enemyXRange[0]
+        && playerXRange[0] <= enemyXRange[1]
+    )
+    &&
+    (
+      enemyYRange[0] >= playerYRange[0]
+      && enemyYRange[0] <= playerYRange[1]
+      ||
+      playerYRange[0] >= enemyYRange[0]
+      && playerYRange[0] <= enemyYRange[1]
+    )
+  ) {
     handleLose();
   }
 }
 
 function handleWin(thisPlayer) {
-  reset(thisPlayer);
+  thisPlayer.reset();
 
   dataLayer.score += 1;
   dataLayer.level += 1;
 
-  document.querySelector('.' + scorePanelClassName).innerText = 'Score: ' + dataLayer.score;
+  renderScore();
 
-  if(currentEnemies < maxEnemies) {
+  if(dataLayer.currentEnemiesNumber < maxEnemies) {
 
     const yCoordinate = 'y_row' + currentRow;
     allEnemies.push(new Enemy(enemyStartingPoint.x, enemyStartingPoint[yCoordinate]));
 
     currentRow = Math.floor(Math.random() * 3) + 1;
-    currentEnemies += 1;
+    dataLayer.currentEnemiesNumber += 1;
   }
 }
 
 function handleLose() {
-  dataLayer.score = 0;
-  dataLayer.level = 0;
+  dataLayer = { ...initialDataLayer };
 
-  document.querySelector('.' + scorePanelClassName).innerText = 'Score: ' + dataLayer.score;
+  renderScore();
 
-  currentRow = 1;
-  currentEnemies = 3;
+  currentRow = Math.floor(Math.random() * 3) + 1;
+  dataLayer.currentEnemiesNumber = 3;
 
-  player = new Player(playerStartingPoint.x, playerStartingPoint.y);
+  player.reset();
   allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
 }
 
-function reset(thisPlayer) {
-  thisPlayer.x = playerStartingPoint.x;
-  thisPlayer.y = playerStartingPoint.y;
+function renderScore() {
+  document.querySelector('.' + scorePanelClassName).innerText = 'Score: ' + dataLayer.score;
 }

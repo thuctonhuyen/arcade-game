@@ -37,13 +37,16 @@ var Player = function(x, y) {
   this.sprite = 'images/char-boy.png';
 };
 
-Player.prototype.update = function(dt) {
-  // do nothing
-};
+Player.prototype.update = function(dt) {};
 
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Player.prototype.reset = function () {
+  this.x = playerStartingPoint.x;
+  this.y = playerStartingPoint.y;
+}
 
 Player.prototype.handleInput = function(key) {
   switch(key) {
@@ -78,13 +81,10 @@ Player.prototype.handleInput = function(key) {
   }
 }
 
-
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
-// let allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1)];
-
 let player = new Player(playerStartingPoint.x, playerStartingPoint.y);
 
 // This listens for key presses and sends the keys to your
