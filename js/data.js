@@ -1,7 +1,11 @@
-let dataLayer = {
+const initialDataLayer = {
   score: 0,
   level: 1,
-}
+  currentEnemiesNumber: 3,
+  currentRow: Math.floor(Math.random() * 3) + 1,
+};
+
+let dataLayer = {...initialDataLayer};
 
 const speed = 8;
 
@@ -31,7 +35,6 @@ const playerSize = {
 };
 
 const maxEnemies = 12;
-let currentEnemies = 3;
 let currentRow = Math.floor(Math.random() * 3) + 1;
 
 const canvas = {
