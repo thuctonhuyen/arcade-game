@@ -28,6 +28,7 @@ Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -62,8 +63,7 @@ Player.prototype.handleInput = function(key) {
     }
     case 'up': {
       if(this.y <= 40) {
-        //reset:
-        handleWin(this);
+        handleWin();
       } else {
         this.y = this.y - verticalMoveUnit;
       }
@@ -81,12 +81,6 @@ Player.prototype.handleInput = function(key) {
   }
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-let allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
-let player = new Player(playerStartingPoint.x, playerStartingPoint.y);
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -100,3 +94,6 @@ document.addEventListener('keyup', function(e) {
 
   player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// initiate needed data for the app:
+initApp();
