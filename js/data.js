@@ -1,9 +1,13 @@
 // constant data:
+const totalEnemiesRowKeyPrefix = 'totalEnemiesRow';
+const totalRows = 3;
 const initialDataLayer = {
   score: 0,
   level: 1,
   currentEnemiesNumber: 3,
-  currentRow: Math.floor(Math.random() * 3) + 1,
+  [totalEnemiesRowKeyPrefix + '1']: 0,
+  [totalEnemiesRowKeyPrefix + '2']: 0,
+  [totalEnemiesRowKeyPrefix + '3']: 0
 };
 const speed = 8;
 const playerStartingPoint = {
@@ -19,7 +23,8 @@ const enemyStartingPoint = {
   [yRowKeyPrefix + '2']: 150,
   [yRowKeyPrefix + '3']: 230,
 }
-const maxEnemies = 12;
+const maxEnemies = 15;
+const maxEnemiesPerRow = maxEnemies/totalRows;
 const canvas = {
   height: 606,
   width: 505

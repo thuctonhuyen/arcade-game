@@ -16,12 +16,28 @@ function renderScore() {
 
 function addMoreEnemies() {
   if(dataLayer.currentEnemiesNumber < maxEnemies) {
-    const yCoordinate = yRowKeyPrefix + dataLayer.currentRow;
+    const currentRow = generateRandomRowNumber();
+
+
+    const yCoordinate = yRowKeyPrefix + currentRow;
     allEnemies.push(new Enemy(enemyStartingPoint.x, enemyStartingPoint[yCoordinate]));
 
-    dataLayer.currentRow = Math.floor(Math.random() * 3) + 1;
     dataLayer.currentEnemiesNumber += 1;
   }
+}
+
+// generateRnadomRowNumber returns a random row number such that
+// the returned row number should be random and the row should
+// not exceed the max number of enemies per row
+function generateRandomRowNumber() {
+  let currentRow = Math.floor(Math.random() * 3) + 1;
+  let currentRowTotalEnemies = dataLayer[totalEnemiesRowKeyPrefix + currentRow];
+
+  while(currentRowTotalEnemies >= maxEnemiesPerRow) {
+    currentRow = Math.floor(Math.random() * 3) + 1;
+    currentRowTotalEnemies = dataLayer[totalEnemiesRowKeyPrefix + currentRow];
+  }
+  return currentRow;
 }
 
 
