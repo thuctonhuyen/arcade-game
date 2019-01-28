@@ -20,13 +20,53 @@ Enemy.prototype.update = function(dt) {
     this.x = 0;
   }
 
-  handleCollision(this, player);
+  this.checkCollision();
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+// handle collison by checking whether current enemy and player
+// are collided with each other or not. If they are collided,
+// then it will call handleLose to handle the lost situation
+Enemy.prototype.checkCollision = function() {
+  // calculate the range of x coordinates [x_start, x_end] of enemy and player
+  // where x_start is current x of enemy/player - 15 and
+  // x_end is current x of enemy/player + 50
+  const enemyXRange = [this.x - 15, this.x + 50];
+  const playerXRange = [player.x - 15, player.x + 50];
+
+  // calculate the range of y coordinates [y_start, y_end] of enemy and player
+  // where y_start is current y of enemy/player - 5 and
+  // y_end is current y of enemy/player + 50
+  const enemyYRange = [this.y - 5, this.y + 50];
+  const playerYRange = [player.y - 5, player.y + 50];
+
+  // enemy and player are collided if range of x coordiates
+  // and y coordinates of enemy intersects with the range of
+  // x coordinates and y coordinates of player
+  if (
+    (
+      enemyXRange[0] >= playerXRange[0]
+      && enemyXRange[0] <= playerXRange[1]
+      ||
+      playerXRange[0] >= enemyXRange[0]
+        && playerXRange[0] <= enemyXRange[1]
+    )
+    &&
+    (
+      enemyYRange[0] >= playerYRange[0]
+      && enemyYRange[0] <= playerYRange[1]
+      ||
+      playerYRange[0] >= enemyYRange[0]
+      && playerYRange[0] <= enemyYRange[1]
+    )
+  ) {
+    handleLose();
+  }
+}
 
 
 // Now write your own player class
