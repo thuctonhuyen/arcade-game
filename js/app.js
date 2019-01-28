@@ -111,7 +111,6 @@ Player.prototype.handleInput = function(key) {
     }
     case 'down': {
       const temp = this.y + verticalMoveUnit;
-
       this.y = temp >= 450 ? this.y : temp;
       break;
     }

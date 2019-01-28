@@ -45,14 +45,15 @@ function initApp() {
   // Initiate the data layer:
   dataLayer = Object.assign({}, initialDataLayer);
 
-  // Place all enemy objects in an array called allEnemies
+
   if(!player) {
+    // Place the player object in a variable called player
     player = new Player(playerStartingPoint.x, playerStartingPoint.y);
   } else {
     player.reset();
   }
 
-  // Place the player object in a variable called player
+  // Place all enemy objects in an array called allEnemies
   allEnemies = [new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row1), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row2), new Enemy(enemyStartingPoint.x, enemyStartingPoint.y_row3)];
 
   renderScore();
